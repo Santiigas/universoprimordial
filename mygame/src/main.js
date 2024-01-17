@@ -6,6 +6,9 @@ kaboom()
 
 //carregando imagen do personagem 
 loadSprite("bean", "sprites/bean.png")
+loadSprite("cenario", "sprites/cenario.png")
+
+
 
 //conceitos de cena. O que vai acontecer se algo acontecer
 //se bateu na arvore é game over
@@ -20,7 +23,7 @@ scene("game", () => {
 		//pegando a imagem e joga na teal
 		sprite("bean"),
 		//posicao na tela
-		pos(80, 180),
+		pos(100, 100),
 		//area de colisao
 		area(),
 		//significa que é um corpo fisico e que responde a uma gravidade
@@ -39,19 +42,15 @@ scene("game", () => {
 
 	// adiciona uma plataforma(chão)
 	const chao = add([
-		//cria uma retangulo
-		rect(width(), 48),
+		sprite("cenario"),
+		scale(1),
 		//posicao do retangulo
-		pos(0, height() - 48),
-		//sombra/contorno
-		outline(4),
+		pos(0, -100),
 		//pode ocorrer colisoes nele
 		area(),
 		//responde a uma gravidade e "isStattic: true" nao pode se mover
 		body({ isStatic: true }),
-		color(127, 200, 255),
 	])
-
 
 })
 
