@@ -2,6 +2,8 @@ import kaboom from "kaboom"
 
 kaboom()
 
+//npm run dev
+
 //carregando imagen do personagem 
 loadSprite("bean", "sprites/bean.png")
 
