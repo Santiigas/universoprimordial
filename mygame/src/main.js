@@ -43,13 +43,14 @@ scene("game", () => {
 		}
 	});
 
-	// adiciona uma plataforma(chão)
+	//LADO ESQUERD0
 	add([
 		rect(width(), 48),
 		pos(0, height() - 48),
 		area(),
 		body({ isStatic: true }),
 		color(127, 200, 255),
+		"chao",
 	])
 
 	add([
@@ -58,6 +59,7 @@ scene("game", () => {
 		area(),
 		body({ isStatic: true }),
 		color(827, 200, 255),
+		"camada1",
 	])
 	
 	add([
@@ -66,6 +68,44 @@ scene("game", () => {
 		area(),
 		body({ isStatic: true }),
 		color(827, 500, 755),
+		"camada2",
+	])
+
+	add([
+		rect(250, 318),
+		pos(0, height() - 512),
+		area(),
+		body({ isStatic: true }),
+		color(827, 100, 755),
+		"camada3",
+	])
+
+	//LADO ESQUERD0
+	add([
+		rect(500, 28),
+		pos(1420, height() - 76),
+		area(),
+		body({ isStatic: true }),
+		color(827, 200, 255),
+		"camada1",
+	])
+
+	add([
+		rect(350, 118),
+		pos(1570, height() - 194),
+		area(),
+		body({ isStatic: true }),
+		color(827, 500, 755),
+		"camada2",
+	])
+
+	add([
+		rect(250, 318),
+		pos(1670, height() - 512),
+		area(),
+		body({ isStatic: true }),
+		color(827, 100, 755),
+		"camada3",
 	])
 
 })
