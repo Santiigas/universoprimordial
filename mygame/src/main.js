@@ -2,7 +2,12 @@ import kaboom from "kaboom"
 
 //npm run dev
 
-kaboom()
+kaboom({
+	width: 1380,
+    height: 820,
+	background: [118, 183, 745],
+	letterbox: true
+})
 
 
 const SPEED = 320
@@ -12,7 +17,7 @@ scene("game", () => {
 
 	const player = add([
 		rect(20, 40),
-		pos(940, 480),
+		pos(700, 480),
 		area(),
 		body(),
 		color(127, 600, 255),
@@ -55,8 +60,8 @@ scene("game", () => {
 	])
 
 	add([
-		rect(500, 28),
-		pos(0, height() - 76),
+		rect(350, 24),
+		pos(0, height() - 72),
 		area(),
 		body({ isStatic: true }),
 		color(827, 200, 255),
@@ -64,8 +69,8 @@ scene("game", () => {
 	])
 	
 	add([
-		rect(350, 118),
-		pos(0, height() - 194),
+		rect(230, 118),
+		pos(0, height() - 190),
 		area(),
 		body({ isStatic: true }),
 		color(827, 500, 755),
@@ -73,8 +78,8 @@ scene("game", () => {
 	])
 
 	add([
-		rect(250, 318),
-		pos(0, height() - 512),
+		rect(140, 300),
+		pos(0, height() - 490),
 		area(),
 		body({ isStatic: true }),
 		color(827, 100, 755),
@@ -82,9 +87,10 @@ scene("game", () => {
 	])
 
 	//LADO ESQUERD0
+	
 	add([
-		rect(500, 28),
-		pos(1420, height() - 76),
+		rect(350, 24),
+		pos(1030, height() - 72),
 		area(),
 		body({ isStatic: true }),
 		color(827, 200, 255),
@@ -92,8 +98,8 @@ scene("game", () => {
 	])
 
 	add([
-		rect(350, 118),
-		pos(1570, height() - 194),
+		rect(230, 118),
+		pos(1150, height() - 190),
 		area(),
 		body({ isStatic: true }),
 		color(827, 500, 755),
@@ -101,13 +107,49 @@ scene("game", () => {
 	])
 
 	add([
-		rect(250, 318),
-		pos(1670, height() - 512),
+		rect(140, 300),
+		pos(1240, height() - 490),
 		area(),
 		body({ isStatic: true }),
 		color(827, 100, 755),
 		"camada3",
 	])
+
+	//Inimigos
+	//funcao para colocar a arvore aparecendo em intervalos de tempos aletarorios
+	function spawnTree() {
+		add([ 
+			rect(15, 15),
+			area(),
+			pos(width(), height() - 490),
+			anchor("botleft"),
+			color(255, 180, 255),
+			move(LEFT, 140),
+			body({ isStatic: false }),
+			"tree",
+		]);
+			wait(10.4, () => {
+			spawnTree();
+		});
+
+		add([ 
+			rect(15, 15),
+			area(),
+			pos(0, height() - 490),
+			anchor("botleft"),
+			color(255, 180, 255),
+			move(RIGHT, 140),
+			body({ isStatic: false }),
+			"tree",
+		]);
+			wait(27.0, () => {
+			spawnTree();
+		});
+		
+	}
+
+	spawnTree();
+	
 
 })
 
