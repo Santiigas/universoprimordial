@@ -4,6 +4,7 @@ import kaboom from "kaboom"
 
 kaboom()
 
+
 const SPEED = 320
 
 scene("game", () => {
