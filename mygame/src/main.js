@@ -156,10 +156,10 @@ scene("game", () => {
 		PONTUACAO +=10
 
 	})
-	
+
 	maquina.onCollide("inimigo", (inimigo) => {
 		destroy(inimigo)
-		VIDAS - 1
+		VIDAS -= 1
 	})
 
 
@@ -195,8 +195,7 @@ scene("game", () => {
 		text("3"),
 		pos(1330,30),
 		{ update() { this.text = VIDAS } },
-	])
-	
+	])	
 
 })
 
