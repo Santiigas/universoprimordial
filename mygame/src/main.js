@@ -12,7 +12,7 @@ kaboom({
 
 scene("game", () => {
 
-	const SPEED = 320
+	let SPEED = 320
 	let PONTUACAO = 0
 	let VIDAS = 3
 
@@ -52,6 +52,7 @@ scene("game", () => {
 		}
 	});
 
+	//MAPA ----------------------------------------------------
 	//LADO ESQUERD0
 	add([
 		rect(width(), 48),
@@ -90,7 +91,6 @@ scene("game", () => {
 	])
 
 	//LADO ESQUERD0
-	
 	add([
 		rect(350, 24),
 		pos(1030, height() - 72),
@@ -118,7 +118,7 @@ scene("game", () => {
 		"camada3",
 	])
 
-	// Maquina
+	// Maquina --------------------------------
 	const maquina = add([
 		rect(30, 50),
 		pos(694, height() - 98),
@@ -128,10 +128,8 @@ scene("game", () => {
 		"camada3",
 	])
 
-
-	//Inimigos
-	
-	function spawnTree() {
+	//Inimigos ---------------------------------------
+	function inimigoAparece() {
 		const inimigo = add([ 
 			rect(15, 15),
 			area(),
@@ -142,19 +140,53 @@ scene("game", () => {
 			body({ isStatic: false }),
 			"inimigo",
 		]);
-			wait(14.1, () => {
-			spawnTree();
+			wait(10.1, () => {
+			inimigoAparece();
 		});
 	}
 
-	spawnTree();
+	inimigoAparece();
+
+	// SKILS ------------------------
+	function vidaAparece() {
+		const vida = add([ 
+			rect(15, 15),
+			area(),
+			pos(width() - 180, height() - 290),
+			anchor("botleft"),
+			color(255, 188, 5),
+			body({ isStatic: false }),
+			"vida",
+		]);
+			wait(75.1, () => {
+			vidaAparece();
+		});
+	}
+
+	vidaAparece();
+
+	function velocidadeAparece() {
+		const velocidade = add([ 
+			rect(15, 15),
+			area(),
+			pos(width() - 1200, height() - 290),
+			anchor("botleft"),
+			color(67, 52, 235),
+			body({ isStatic: false }),
+			"velocidade",
+		]);
+			wait(75.1, () => {
+			velocidadeAparece();
+		});
+	}
+
+	velocidadeAparece();
 	
 
 	//COLISOES
 	player.onCollide("inimigo", (inimigo) => {
 		destroy(inimigo)
 		PONTUACAO +=10
-
 	})
 
 	maquina.onCollide("inimigo", (inimigo) => {
@@ -162,7 +194,23 @@ scene("game", () => {
 		VIDAS -= 1
 	})
 
+	player.onCollide("vida", (vida) => {
+		destroy(vida)
+		VIDAS += 1
+	})
 
+	player.onCollide("velocidade", (velocidade) => {
+		destroy(velocidade)
+		SPEED += 500;
+
+		function diminuirVelocidade(){
+			SPEED -= 500
+		}
+
+		setTimeout(diminuirVelocidade, 10000)
+	});
+
+ 
 
 	//PONTACAO NA TELA
 	const textopontuacao = add([
