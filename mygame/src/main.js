@@ -115,8 +115,19 @@ scene("game", () => {
 		"camada3",
 	])
 
+	// Maquina
+	add([
+		rect(30, 50),
+		pos(694, height() - 98),
+		area(),
+		body({ isStatic: true }),
+		color(827, 100, 755),
+		"camada3",
+	])
+
+
 	//Inimigos
-	//funcao para colocar a arvore aparecendo em intervalos de tempos aletarorios
+	
 	function spawnTree() {
 		add([ 
 			rect(15, 15),
@@ -126,23 +137,9 @@ scene("game", () => {
 			color(255, 180, 255),
 			move(LEFT, 140),
 			body({ isStatic: false }),
-			"tree",
+			"inimigo",
 		]);
-			wait(10.4, () => {
-			spawnTree();
-		});
-
-		add([ 
-			rect(15, 15),
-			area(),
-			pos(0, height() - 490),
-			anchor("botleft"),
-			color(255, 180, 255),
-			move(RIGHT, 140),
-			body({ isStatic: false }),
-			"tree",
-		]);
-			wait(27.0, () => {
+			wait(1.4, () => {
 			spawnTree();
 		});
 		
@@ -150,6 +147,10 @@ scene("game", () => {
 
 	spawnTree();
 	
+
+	player.onCollide("inimigo", (inimigo) => {
+		destroy(inimigo)
+	})
 
 })
 
