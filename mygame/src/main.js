@@ -10,9 +10,12 @@ kaboom({
 })
 
 
-const SPEED = 320
-
 scene("game", () => {
+
+	const SPEED = 320
+	let PONTUACAO = 0
+	let VIDAS = 3
+
 	setGravity(1600)
 
 	const player = add([
@@ -116,7 +119,7 @@ scene("game", () => {
 	])
 
 	// Maquina
-	add([
+	const maquina = add([
 		rect(30, 50),
 		pos(694, height() - 98),
 		area(),
@@ -129,28 +132,71 @@ scene("game", () => {
 	//Inimigos
 	
 	function spawnTree() {
-		add([ 
+		const inimigo = add([ 
 			rect(15, 15),
 			area(),
 			pos(width(), height() - 490),
 			anchor("botleft"),
 			color(255, 180, 255),
-			move(LEFT, 140),
+			move(LEFT, 100),
 			body({ isStatic: false }),
 			"inimigo",
 		]);
-			wait(1.4, () => {
+			wait(14.1, () => {
 			spawnTree();
 		});
-		
 	}
 
 	spawnTree();
 	
 
+	//COLISOES
 	player.onCollide("inimigo", (inimigo) => {
 		destroy(inimigo)
+		PONTUACAO +=10
+
 	})
+	
+	maquina.onCollide("inimigo", (inimigo) => {
+		destroy(inimigo)
+		VIDAS - 1
+	})
+
+
+
+	//PONTACAO NA TELA
+	const textopontuacao = add([
+		text("Pontos:"),
+		pos(30,30),
+	])
+
+	const ui = add([
+		fixed(),
+	])
+
+	ui.add([
+		text("0"),
+		pos(177,30),
+		{ update() { this.text = PONTUACAO } },
+	])
+
+
+	//VIDAS
+	const textovidas = add([
+		text("Vidas:"),
+		pos(1200,30),
+	])
+
+	const ui2 = add([
+		fixed(),
+	])
+
+	ui2.add([
+		text("3"),
+		pos(1330,30),
+		{ update() { this.text = VIDAS } },
+	])
+	
 
 })
 
