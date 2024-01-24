@@ -9,6 +9,8 @@ kaboom({
 	letterbox: true
 })
 
+loadSprite("fundo", "sprites/fundo.png")
+
 
 scene("game", () => {
 
@@ -18,12 +20,20 @@ scene("game", () => {
 
 	setGravity(1600)
 
+	const fundo = add([
+		sprite("fundo"),
+		pos(0, 0),
+		area(),
+		z(50),
+	])
+
 	const player = add([
 		rect(20, 40),
 		pos(700, 480),
 		area(),
 		body(),
 		color(127, 600, 255),
+		z(100)
 	])
 
 	//Movimentacao
@@ -60,6 +70,7 @@ scene("game", () => {
 		area(),
 		body({ isStatic: true }),
 		color(127, 200, 255),
+		z(100),
 		"chao",
 	])
 
@@ -69,6 +80,7 @@ scene("game", () => {
 		area(),
 		body({ isStatic: true }),
 		color(827, 200, 255),
+		z(100),
 		"camada1",
 	])
 	
@@ -78,6 +90,7 @@ scene("game", () => {
 		area(),
 		body({ isStatic: true }),
 		color(827, 500, 755),
+		z(100),
 		"camada2",
 	])
 
@@ -87,6 +100,7 @@ scene("game", () => {
 		area(),
 		body({ isStatic: true }),
 		color(827, 100, 755),
+		z(100),
 		"camada3",
 	])
 
@@ -97,6 +111,7 @@ scene("game", () => {
 		area(),
 		body({ isStatic: true }),
 		color(827, 200, 255),
+		z(100),
 		"camada1",
 	])
 
@@ -106,6 +121,7 @@ scene("game", () => {
 		area(),
 		body({ isStatic: true }),
 		color(827, 500, 755),
+		z(100),
 		"camada2",
 	])
 
@@ -115,6 +131,7 @@ scene("game", () => {
 		area(),
 		body({ isStatic: true }),
 		color(827, 100, 755),
+		z(100),
 		"camada3",
 	])
 
@@ -125,6 +142,7 @@ scene("game", () => {
 		area(),
 		body({ isStatic: true }),
 		color(827, 100, 755),
+		z(100),
 		"camada3",
 	])
 
@@ -138,6 +156,7 @@ scene("game", () => {
 			color(255, 180, 255),
 			move(LEFT, 100),
 			body({ isStatic: false }),
+			z(100),
 			"inimigo",
 		]);
 			wait(rand(6.5, 10.5), () => {
@@ -156,6 +175,7 @@ scene("game", () => {
 			color(255, 180, 255),
 			move(RIGHT, 100),
 			body({ isStatic: false }),
+			z(100),
 			"inimigo",
 		]);
 			wait(rand(7.5, 9.5), () => {
@@ -174,6 +194,7 @@ scene("game", () => {
 			anchor("botleft"),
 			color(255, 188, 5),
 			body({ isStatic: false }),
+			z(100),
 			"vida",
 		]);
 			wait(75.1, () => {
@@ -191,6 +212,7 @@ scene("game", () => {
 			anchor("botleft"),
 			color(67, 52, 235),
 			body({ isStatic: false }),
+			z(100),
 			"velocidade",
 		]);
 			wait(75.1, () => {
@@ -228,6 +250,7 @@ scene("game", () => {
 			anchor("botleft"),
 			color(165, 19, 209),
 			body({ isStatic: true }),
+			z(100),
 			"iconeVelocidade",
 		])
 
@@ -250,15 +273,18 @@ scene("game", () => {
 	const textopontuacao = add([
 		text("Pontos:"),
 		pos(30,30),
+		z(100)
 	])
 
 	const ui = add([
 		fixed(),
+		z(100),
 	])
 
 	ui.add([
 		text("0"),
 		pos(177,30),
+		z(100),
 		{ update() { this.text = PONTUACAO } },
 	])
 
@@ -267,15 +293,18 @@ scene("game", () => {
 	const textovidas = add([
 		text("Vidas:"),
 		pos(1200,30),
+		z(100)
 	])
 
 	const ui2 = add([
 		fixed(),
+		z(100),
 	])
 
 	ui2.add([
 		text("3"),
 		pos(1330,30),
+		z(100),
 		{ update() { this.text = VIDAS } },
 	])	
 
