@@ -3,8 +3,8 @@ import kaboom from "kaboom"
 //npm run dev
 
 kaboom({
-	width: 1380,
-    height: 820,
+	width: 1920,
+    height: 1080,
 	background: [118, 183, 745],
 	letterbox: true
 })
@@ -75,7 +75,7 @@ scene("game", () => {
 	])
 
 	add([
-		rect(350, 24),
+		rect(450, 24),
 		pos(0, height() - 72),
 		area(),
 		body({ isStatic: true }),
@@ -85,7 +85,7 @@ scene("game", () => {
 	])
 	
 	add([
-		rect(230, 118),
+		rect(300, 118),
 		pos(0, height() - 190),
 		area(),
 		body({ isStatic: true }),
@@ -95,7 +95,7 @@ scene("game", () => {
 	])
 
 	add([
-		rect(140, 300),
+		rect(180, 300),
 		pos(0, height() - 490),
 		area(),
 		body({ isStatic: true }),
@@ -106,8 +106,8 @@ scene("game", () => {
 
 	//LADO ESQUERD0
 	add([
-		rect(350, 24),
-		pos(1030, height() - 72),
+		rect(450, 24),
+		pos(1470, height() - 72),
 		area(),
 		body({ isStatic: true }),
 		color(827, 200, 255),
@@ -116,8 +116,8 @@ scene("game", () => {
 	])
 
 	add([
-		rect(230, 118),
-		pos(1150, height() - 190),
+		rect(300, 118),
+		pos(1629, height() - 190),
 		area(),
 		body({ isStatic: true }),
 		color(827, 500, 755),
@@ -126,8 +126,8 @@ scene("game", () => {
 	])
 
 	add([
-		rect(140, 300),
-		pos(1240, height() - 490),
+		rect(180, 300),
+		pos(1740, height() - 490),
 		area(),
 		body({ isStatic: true }),
 		color(827, 100, 755),
