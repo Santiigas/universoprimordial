@@ -140,19 +140,37 @@ scene("game", () => {
 			body({ isStatic: false }),
 			"inimigo",
 		]);
-			wait(10.1, () => {
+			wait(rand(6.5, 10.5), () => {
 			inimigoAparece();
+		});
+	}  
+
+	inimigoAparece();
+
+	function inimigoAparece2() {
+		const inimigo2 = add([ 
+			rect(15, 15),
+			area(), 
+			pos(width() -1390, height() - 500),
+			anchor("botleft"),
+			color(255, 180, 255),
+			move(RIGHT, 100),
+			body({ isStatic: false }),
+			"inimigo",
+		]);
+			wait(rand(7.5, 9.5), () => {
+			inimigoAparece2();
 		});
 	}
 
-	inimigoAparece();
+	inimigoAparece2();
 
 	// SKILS ------------------------
 	function vidaAparece() {
 		const vida = add([ 
 			rect(15, 15),
 			area(),
-			pos(width() - 180, height() - 290),
+			pos(width() - 180 , height() - 290),
 			anchor("botleft"),
 			color(255, 188, 5),
 			body({ isStatic: false }),
@@ -201,13 +219,29 @@ scene("game", () => {
 
 	player.onCollide("velocidade", (velocidade) => {
 		destroy(velocidade)
-		SPEED += 500;
+		SPEED += 300;
+
+		const addIconeDeVelocidade = add([
+			rect(15, 15),
+			area(),
+			pos(1000, 54),
+			anchor("botleft"),
+			color(165, 19, 209),
+			body({ isStatic: true }),
+			"iconeVelocidade",
+		])
 
 		function diminuirVelocidade(){
-			SPEED -= 500
+			SPEED -= 300
+		}
+
+		function removeIconeDeVelocidade(){
+			destroy(iconeVelocidade)
 		}
 
 		setTimeout(diminuirVelocidade, 10000)
+		setTimeout(removeIconeDeVelocidade, 10000)
+
 	});
 
  
