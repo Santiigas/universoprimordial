@@ -20,7 +20,7 @@ loadSprite("player", "sprites/player.png",{
 		"correndo":{
 			from: 2,
 			to: 3,
-			speed: 5,
+			speed: 7,
 			loop: true,
 		},
 	},
@@ -33,10 +33,10 @@ loadSprite("nuven2", "sprites/nuven2.png")
 
 scene("game", () => {
 
-	let SPEED = 320
+	let SPEED = 380
 	let PONTUACAO = 0
 	let VIDAS = 3
-	const JUMP_FORCE = 240
+	const JUMP_FORCE = 640
 
 	setGravity(1600)
 
