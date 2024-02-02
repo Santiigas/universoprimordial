@@ -9,7 +9,26 @@ kaboom({
 	letterbox: true
 })
 
+loadSprite("player", "sprites/player.png",{
+	sliceX: 4,
+
+	anims:{
+		"parado": 0,
+
+		"pulando": 1,
+
+		"correndo":{
+			from: 2,
+			to: 3,
+			speed: 5,
+			loop: true,
+		},
+	},
+})
+
 loadSprite("fundo", "sprites/fundo.png")
+loadSprite("nuven1", "sprites/nuven1.png")
+loadSprite("nuven2", "sprites/nuven2.png")
 
 
 scene("game", () => {
@@ -17,6 +36,7 @@ scene("game", () => {
 	let SPEED = 320
 	let PONTUACAO = 0
 	let VIDAS = 3
+	const JUMP_FORCE = 240
 
 	setGravity(1600)
 
@@ -28,17 +48,74 @@ scene("game", () => {
 	])
 
 	const player = add([
-		rect(20, 40),
+		sprite("player"),
 		pos(700, 480),
 		area(),
 		body(),
-		color(127, 600, 255),
 		z(100)
 	])
 
+	player.play("parado")
+
+	// Switch to "idle" or "run" animation when player hits ground
+	player.onGround(() => {
+	if (!isKeyDown("left") && !isKeyDown("right")) {
+		player.play("parado")
+	} else {
+		player.play("correndo")
+	}
+})
+
+	player.onAnimEnd((anim) => {
+		if (anim === "parado") {
+			// You can also register an event that runs when certain anim ends
+		}
+	})
+
+	onKeyPress("space", () => {
+		if (player.isGrounded()) {
+			player.jump(JUMP_FORCE)
+			player.play("pulando")
+		}
+	})
+
+	onKeyDown("left", () => {
+		player.move(-SPEED, 0)
+		player.flipX = true
+		// .play() will reset to the first frame of the anim, so we want to make sure it only runs when the current animation is not "run"
+		if (player.isGrounded() && player.curAnim() !== "correndo") {
+			player.play("correndo")
+		}
+	})
+
+	onKeyDown("right", () => {
+		player.move(SPEED, 0)
+		player.flipX = false
+		if (player.isGrounded() && player.curAnim() !== "correndo") {
+			player.play("correndo")
+		}
+	})
+
+	;["left", "right"].forEach((key) => {
+		onKeyRelease(key, () => {
+		// Only reset to "idle" if player is not holding any of these keys
+			if (player.isGrounded() && !isKeyDown("left") && !isKeyDown("right")) {
+				player.play("parado")
+			}
+		})
+	})
+
+	const getInfo = () => `
+	Anim: ${player.curAnim()}
+	Frame: ${player.frame}
+	`.trim()
+
+
+	/**
 	//Movimentacao
 	onKeyDown("left", () => {
 		player.move(-SPEED, 0)
+		player.play("correndo")
 	})
 
 	onKeyDown("right", () => {
@@ -61,6 +138,7 @@ scene("game", () => {
 			player.jump();
 		}
 	});
+	*/
 
 	//MAPA ----------------------------------------------------
 	//LADO ESQUERD0
@@ -69,7 +147,7 @@ scene("game", () => {
 		pos(0, height() - 48),
 		area(),
 		body({ isStatic: true }),
-		color(127, 200, 255),
+		color(56, 15, 2),
 		z(100),
 		"chao",
 	])
@@ -79,7 +157,7 @@ scene("game", () => {
 		pos(0, height() - 72),
 		area(),
 		body({ isStatic: true }),
-		color(827, 200, 255),
+		color(76, 23, 6),
 		z(100),
 		"camada1",
 	])
@@ -89,7 +167,7 @@ scene("game", () => {
 		pos(0, height() - 190),
 		area(),
 		body({ isStatic: true }),
-		color(827, 500, 755),
+		color(76, 23, 6),
 		z(100),
 		"camada2",
 	])
@@ -99,7 +177,7 @@ scene("game", () => {
 		pos(0, height() - 490),
 		area(),
 		body({ isStatic: true }),
-		color(827, 100, 755),
+		color(76, 23, 6),
 		z(100),
 		"camada3",
 	])
@@ -110,7 +188,7 @@ scene("game", () => {
 		pos(1470, height() - 72),
 		area(),
 		body({ isStatic: true }),
-		color(827, 200, 255),
+		color(76, 23, 6),
 		z(100),
 		"camada1",
 	])
@@ -120,7 +198,7 @@ scene("game", () => {
 		pos(1629, height() - 190),
 		area(),
 		body({ isStatic: true }),
-		color(827, 500, 755),
+		color(76, 23, 6),
 		z(100),
 		"camada2",
 	])
@@ -130,7 +208,7 @@ scene("game", () => {
 		pos(1740, height() - 490),
 		area(),
 		body({ isStatic: true }),
-		color(827, 100, 755),
+		color(76, 23, 6),
 		z(100),
 		"camada3",
 	])
