@@ -50,6 +50,7 @@ scene("game", () => {
 	const player = add([
 		sprite("player"),
 		pos(700, 480),
+		scale(2),
 		area(),
 		body(),
 		z(100)
@@ -104,11 +105,6 @@ scene("game", () => {
 			}
 		})
 	})
-
-	const getInfo = () => `
-	Anim: ${player.curAnim()}
-	Frame: ${player.frame}
-	`.trim()
 
 
 	/**
