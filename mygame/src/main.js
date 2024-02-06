@@ -65,7 +65,7 @@ scene("game", () => {
 	} else {
 		player.play("correndo")
 	}
-})
+	})
 
 	player.onAnimEnd((anim) => {
 		if (anim === "parado") {
