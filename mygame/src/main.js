@@ -29,6 +29,9 @@ loadSprite("player", "sprites/player.png",{
 loadSprite("fundo", "sprites/fundo.png")
 loadSprite("nuven1", "sprites/nuven1.png")
 loadSprite("nuven2", "sprites/nuven2.png")
+loadSprite("vida", "sprites/vida.png")
+loadSprite("velocidade", "sprites/velocidade.png")
+loadSprite("inimigo", "sprites/inimigo.png")
 
 
 scene("game", () => {
@@ -49,7 +52,7 @@ scene("game", () => {
 
 	const player = add([
 		sprite("player"),
-		pos(700, 480),
+		pos(912, 800),
 		scale(2),
 		area(),
 		body(),
@@ -212,10 +215,10 @@ scene("game", () => {
 	// Maquina --------------------------------
 	const maquina = add([
 		rect(30, 50),
-		pos(694, height() - 98),
+		pos(910, height() - 98),
 		area(),
 		body({ isStatic: true }),
-		color(827, 100, 755),
+		color(707, 100, 755),
 		z(100),
 		"camada3",
 	])
@@ -223,11 +226,10 @@ scene("game", () => {
 	//Inimigos ---------------------------------------
 	function inimigoAparece() {
 		const inimigo = add([ 
-			rect(15, 15),
+			sprite("inimigo"),
 			area(),
 			pos(width(), height() - 490),
 			anchor("botleft"),
-			color(255, 180, 255),
 			move(LEFT, 100),
 			body({ isStatic: false }),
 			z(100),
@@ -242,11 +244,10 @@ scene("game", () => {
 
 	function inimigoAparece2() {
 		const inimigo2 = add([ 
-			rect(15, 15),
+			sprite("inimigo"),
 			area(), 
-			pos(width() -1390, height() - 500),
+			pos(width() -1930, height() - 500),
 			anchor("botleft"),
-			color(255, 180, 255),
 			move(RIGHT, 100),
 			body({ isStatic: false }),
 			z(100),
@@ -262,11 +263,10 @@ scene("game", () => {
 	// SKILS ------------------------
 	function vidaAparece() {
 		const vida = add([ 
-			rect(15, 15),
+			sprite("vida"),
 			area(),
-			pos(width() - 180 , height() - 290),
+			pos(width() - 230 , height() - 290),
 			anchor("botleft"),
-			color(255, 188, 5),
 			body({ isStatic: false }),
 			z(100),
 			"vida",
@@ -280,11 +280,10 @@ scene("game", () => {
 
 	function velocidadeAparece() {
 		const velocidade = add([ 
-			rect(15, 15),
+			sprite("velocidade"),
 			area(),
-			pos(width() - 1200, height() - 290),
+			pos(width() - 1720, height() - 290),
 			anchor("botleft"),
-			color(67, 52, 235),
 			body({ isStatic: false }),
 			z(100),
 			"velocidade",
