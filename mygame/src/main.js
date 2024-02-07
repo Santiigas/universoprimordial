@@ -34,6 +34,9 @@ loadSprite("velocidade", "sprites/velocidade.png")
 loadSprite("inimigo", "sprites/inimigo.png")
 loadSprite("reator", "sprites/reator.png")
 
+loadFont("fontegame", "sprites/fonte.ttf")
+
+
 
 scene("game", () => {
 
@@ -86,7 +89,6 @@ scene("game", () => {
 
 	player.onAnimEnd((anim) => {
 		if (anim === "parado") {
-			// You can also register an event that runs when certain anim ends
 		}
 	})
 
@@ -122,36 +124,6 @@ scene("game", () => {
 			}
 		})
 	})
-
-
-	/**
-	//Movimentacao
-	onKeyDown("left", () => {
-		player.move(-SPEED, 0)
-		player.play("correndo")
-	})
-
-	onKeyDown("right", () => {
-		player.move(SPEED, 0)
-	})
-
-
-	onKeyDown("up", () => {
-		player.move(0, -SPEED)
-	})
-
-	onKeyDown("down", () => {
-		player.move(0, SPEED)
-	})
-
-	// .jump() when "space" key is pressed //metodo pre definido para pular
-	onKeyPress("space", () => {
-		//verifica se o personagem está no chao, ou seja, ele so pula se estiver
-		if (player.isGrounded()) {
-			player.jump();
-		}
-	});
-	*/
 
 	//MAPA ----------------------------------------------------
 	//LADO ESQUERD0
@@ -453,7 +425,10 @@ scene("game", () => {
 
 	//PONTACAO NA TELA
 	const textopontuacao = add([
-		text("Pontos:"),
+		text("Pontos:"), {
+			font: "fontegame"
+		},
+		color(76, 23, 6),
 		pos(30,30),
 		z(100)
 	])
@@ -464,8 +439,11 @@ scene("game", () => {
 	])
 
 	ui.add([
-		text("0"),
-		pos(177,30),
+		text("0"), {
+			font: "fontegame"
+		},
+		pos(185,30),
+		color(76, 23, 6),
 		z(100),
 		{ update() { this.text = PONTUACAO } },
 	])
@@ -473,7 +451,10 @@ scene("game", () => {
 
 	//VIDAS
 	const textovidas = add([
-		text("Vidas:"),
+		text("Vidas:"), {
+			font: "fontegame"
+		},
+		color(76, 23, 6),
 		pos(1730,30),
 		z(100)
 	])
@@ -484,8 +465,11 @@ scene("game", () => {
 	])
 
 	ui2.add([
-		text("3"),
+		text("3"), {
+			font: "fontegame"
+		},
 		pos(1860,30),
+		color(76, 23, 6),
 		z(100),
 		{ update() { this.text = VIDAS } },
 	])	
