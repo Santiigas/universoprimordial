@@ -213,6 +213,26 @@ scene("game", () => {
 		"camada3",
 	])
 
+	// Nuvens --------------------------------
+
+	function nuvenAparece() {
+		const nuven1 = add([ 
+			sprite("nuven1"),
+			area(),
+			pos(width(), height() - 490),
+			anchor("botleft"),
+			move(LEFT, 40),
+			body({ isStatic: false }),
+			z(100),
+			"nuven1",
+		]);
+			wait(rand(6.5, 10.5), () => {
+			nuvenAparece();
+		});
+	}  
+
+	nuvenAparece();
+
 	// Maquina --------------------------------
 	const maquina = add([
 		sprite("reator"),
