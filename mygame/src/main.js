@@ -32,6 +32,7 @@ loadSprite("nuven2", "sprites/nuven2.png")
 loadSprite("vida", "sprites/vida.png")
 loadSprite("velocidade", "sprites/velocidade.png")
 loadSprite("inimigo", "sprites/inimigo.png")
+loadSprite("reator", "sprites/reator.png")
 
 
 scene("game", () => {
@@ -214,11 +215,10 @@ scene("game", () => {
 
 	// Maquina --------------------------------
 	const maquina = add([
-		rect(30, 50),
+		sprite("reator"),
 		pos(910, height() - 98),
 		area(),
 		body({ isStatic: true }),
-		color(707, 100, 755),
 		z(100),
 		"camada3",
 	])
@@ -365,7 +365,7 @@ scene("game", () => {
 	//VIDAS
 	const textovidas = add([
 		text("Vidas:"),
-		pos(1200,30),
+		pos(1730,30),
 		z(100)
 	])
 
@@ -376,7 +376,7 @@ scene("game", () => {
 
 	ui2.add([
 		text("3"),
-		pos(1330,30),
+		pos(1860,30),
 		z(100),
 		{ update() { this.text = VIDAS } },
 	])	
