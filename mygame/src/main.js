@@ -37,10 +37,23 @@ loadSprite("reator", "sprites/reator.png")
 
 scene("game", () => {
 
+	//VARIAVEIS ESTATICAS
 	let SPEED = 380
 	let PONTUACAO = 0
 	let VIDAS = 3
 	const JUMP_FORCE = 640
+
+	//VARIAVEIS QUE MUDAM
+	let PONTOS = 10
+	let DROPSKILS = 75.1
+
+	let VELOCIDADE_SURGIMENTO_INIMIGO1_VALOR1 = 6.5
+	let VELOCIDADE_SURGIMENTO_INIMIGO1_VALOR2 = 10.5
+	let VELOCIDADE_SURGIMENTO_INIMIGO2_VALOR1 = 7.5
+	let VELOCIDADE_SURGIMENTO_INIMIGO2_VALOR2= 9.5
+
+	let VELOCIDADE_INIMIGO1 = 100
+	let VELOCIDADE_INIMIGO2 = 100
 
 	setGravity(1600)
 
@@ -226,7 +239,7 @@ scene("game", () => {
 			z(100),
 			"nuven1",
 		]);
-			wait(rand(130.5), () => {
+			wait(rand(110.2, 130.5), () => {
 			nuvenAparece();
 		});
 	}  
@@ -269,12 +282,12 @@ scene("game", () => {
 			area(),
 			pos(width(), height() - 490),
 			anchor("botleft"),
-			move(LEFT, 100),
+			move(LEFT, VELOCIDADE_INIMIGO1),
 			body({ isStatic: false }),
 			z(100),
 			"inimigo",
 		]);
-			wait(rand(6.5, 10.5), () => {
+			wait(rand(VELOCIDADE_SURGIMENTO_INIMIGO1_VALOR1, VELOCIDADE_SURGIMENTO_INIMIGO1_VALOR2), () => {
 			inimigoAparece();
 		});
 	}  
@@ -287,17 +300,35 @@ scene("game", () => {
 			area(), 
 			pos(width() -1930, height() - 500),
 			anchor("botleft"),
-			move(RIGHT, 100),
+			move(RIGHT, VELOCIDADE_INIMIGO2),
 			body({ isStatic: false }),
 			z(100),
 			"inimigo",
 		]);
-			wait(rand(7.5, 9.5), () => {
+			wait(rand(VELOCIDADE_SURGIMENTO_INIMIGO2_VALOR1, VELOCIDADE_SURGIMENTO_INIMIGO2_VALOR2), () => {
 			inimigoAparece2();
 		});
 	}
 
 	inimigoAparece2();
+
+	function inimigoAparece3() {
+		const inimigo3 = add([ 
+			sprite("inimigo"),
+			area(), 
+			pos(width() -1530, height() - 500),
+			anchor("botleft"),
+			move(RIGHT, VELOCIDADE_INIMIGO2),
+			body({ isStatic: false }),
+			z(100),
+			"inimigo",
+		]);
+			wait(rand(VELOCIDADE_SURGIMENTO_INIMIGO2_VALOR1, VELOCIDADE_SURGIMENTO_INIMIGO2_VALOR2), () => {
+			inimigoAparece2();
+		});
+	}
+
+	inimigoAparece3();
 
 	// SKILS ------------------------
 	function vidaAparece() {
@@ -310,7 +341,7 @@ scene("game", () => {
 			z(100),
 			"vida",
 		]);
-			wait(75.1, () => {
+			wait(DROPSKILS, () => {
 			vidaAparece();
 		});
 	}
@@ -327,7 +358,7 @@ scene("game", () => {
 			z(100),
 			"velocidade",
 		]);
-			wait(75.1, () => {
+			wait(DROPSKILS, () => {
 			velocidadeAparece();
 		});
 	}
@@ -335,10 +366,49 @@ scene("game", () => {
 	velocidadeAparece();
 	
 
-	//COLISOES
+	//COLISOES e DIFICULDADE
 	player.onCollide("inimigo", (inimigo) => {
 		destroy(inimigo)
-		PONTUACAO +=10
+		PONTUACAO += PONTOS
+		if(PONTUACAO > 100 && PONTUACAO < 300){
+
+			PONTOS = 15
+			DROPSKILS = 65.1
+
+			VELOCIDADE_SURGIMENTO_INIMIGO1_VALOR1 = 6.5
+			VELOCIDADE_SURGIMENTO_INIMIGO1_VALOR2 = 10.5
+			VELOCIDADE_SURGIMENTO_INIMIGO2_VALOR1 = 7.5
+			VELOCIDADE_SURGIMENTO_INIMIGO2_VALOR2= 9.5
+
+			VELOCIDADE_INIMIGO1 = 140
+			VELOCIDADE_INIMIGO2 = 140
+
+		} else if (PONTUACAO > 300 && PONTUACAO < 600){
+
+			PONTOS = 20
+			DROPSKILS = 55.1
+
+			VELOCIDADE_SURGIMENTO_INIMIGO1_VALOR1 = 6.0
+			VELOCIDADE_SURGIMENTO_INIMIGO1_VALOR2 = 10.0
+			VELOCIDADE_SURGIMENTO_INIMIGO2_VALOR1 = 7.0
+			VELOCIDADE_SURGIMENTO_INIMIGO2_VALOR2= 9.0
+
+			VELOCIDADE_INIMIGO1 = 160
+			VELOCIDADE_INIMIGO2 = 160
+
+		} else if (PONTUACAO > 600 && PONTUACAO < 1000){
+
+			PONTOS = 25
+			DROPSKILS = 45.1
+
+			VELOCIDADE_SURGIMENTO_INIMIGO1_VALOR1 = 6.0
+			VELOCIDADE_SURGIMENTO_INIMIGO1_VALOR2 = 10.0
+			VELOCIDADE_SURGIMENTO_INIMIGO2_VALOR1 = 7.0
+			VELOCIDADE_SURGIMENTO_INIMIGO2_VALOR2= 9.0
+
+			VELOCIDADE_INIMIGO1 = 180
+			VELOCIDADE_INIMIGO2 = 180
+		}
 	})
 
 	maquina.onCollide("inimigo", (inimigo) => {
