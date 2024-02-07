@@ -219,19 +219,38 @@ scene("game", () => {
 		const nuven1 = add([ 
 			sprite("nuven1"),
 			area(),
-			pos(width(), height() - 490),
+			pos(width() -2200, height() - 870),
 			anchor("botleft"),
-			move(LEFT, 40),
-			body({ isStatic: false }),
+			move(RIGHT, 20),
+			body({ isStatic: true }),
 			z(100),
 			"nuven1",
 		]);
-			wait(rand(6.5, 10.5), () => {
+			wait(rand(130.5), () => {
 			nuvenAparece();
 		});
 	}  
 
 	nuvenAparece();
+
+	function nuvenAparece2() {
+		const nuven2 = add([ 
+			sprite("nuven2"),
+			area(),
+			pos(width() -2900, height() - 730),
+			anchor("botleft"),
+			move(RIGHT, 20),
+			body({ isStatic: true }),
+			z(100),
+			"nuven2",
+		]);
+			wait(rand(80.5, 99.5), () => {
+			nuvenAparece2();
+		});
+	}  
+
+	nuvenAparece2();
+
 
 	// Maquina --------------------------------
 	const maquina = add([
