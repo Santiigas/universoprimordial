@@ -1,6 +1,6 @@
 import kaboom from "kaboom"
 
-//npm run dev
+// 
 
 kaboom({
 	width: 1920,
@@ -40,13 +40,13 @@ loadFont("fontegame", "sprites/fonte.ttf")
 scene("game", () => {
 
 	//VARIAVEIS ESTATICAS
-	let SPEED = 380
+	let SPEED = 400
 	let PONTUACAO = 0
 	let VIDAS = 3
 	const JUMP_FORCE = 640
 
 	//VARIAVEIS QUE MUDAM
-	let PONTOS = 10
+	let PONTOS = 10   
 	let DROPSKILS = 75.1
 
 	let VELOCIDADE_SURGIMENTO_INIMIGO1_VALOR1 = 6.5
@@ -61,9 +61,6 @@ scene("game", () => {
 
 	let SURGIMENTO_INIMIGO1_VALOR1 = 40
 	let SURGIMENTO_INIMIGO1_VALOR2 = 30
-
-	let SURGIMENTO_INIMIGO2_VALOR1 = 35
-	let SURGIMENTO_INIMIGO2_VALOR2 = 45
 
 	setGravity(1600)
 
@@ -247,20 +244,11 @@ scene("game", () => {
 	// Maquina --------------------------------
 	const maquina1 = add([
 		sprite("reator"),
-		pos(1110, height() - 98),
+		pos(920, height() - 98),
 		area(),
 		body({ isStatic: true }),
 		z(100),
 		"maquina1",
-	])
-
-	const maquina2 = add([
-		sprite("reator"),
-		pos(750, height() - 98),
-		area(),
-		body({ isStatic: true }),
-		z(100),
-		"maquina2",
 	])
 
 	//Inimigos ---------------------------------------
@@ -304,7 +292,7 @@ scene("game", () => {
 		const inimigo3 = add([ 
 			sprite("inimigo"),
 			area(),
-			pos(width() -801, height() - 1100),
+			pos(width() -990, height() - 1100),
 			anchor("botleft"),
 			move(DOWN, VELOCIDADE_INIMIGO_DE_CIMA),
 			z(100),
@@ -316,23 +304,6 @@ scene("game", () => {
 	}
 
 	inimigoAparece3();
-
-	function inimigoAparece4() {
-		const inimigo3 = add([ 
-			sprite("inimigo"),
-			area(),
-			pos(width() -1162, height() - 1100),
-			anchor("botleft"),
-			move(DOWN, VELOCIDADE_INIMIGO_DE_CIMA),
-			z(100),
-			"inimigo",
-		]);
-			wait(rand(SURGIMENTO_INIMIGO2_VALOR1, SURGIMENTO_INIMIGO2_VALOR2), () => {
-			inimigoAparece4();
-		});
-	}
-
-	inimigoAparece4();
 
 	// SKILS ------------------------
 	function vidaAparece() {
@@ -395,7 +366,7 @@ scene("game", () => {
 			SURGIMENTO_INIMIGO2_VALOR1 = 35
 			SURGIMENTO_INIMIGO2_VALOR2 = 55
 
-		} else if (PONTUACAO > 150 && PONTUACAO < 500){
+		} else if (PONTUACAO > 150 && PONTUACAO < 400){
 
 			PONTOS = 20
 			DROPSKILS = 45.1
@@ -416,7 +387,7 @@ scene("game", () => {
 			SURGIMENTO_INIMIGO2_VALOR1 = 25
 			SURGIMENTO_INIMIGO2_VALOR2 = 45
 
-		} else if (PONTUACAO > 500 && PONTUACAO < 1000){
+		} else if (PONTUACAO > 400 && PONTUACAO < 1000){
 
 			PONTOS = 25
 			DROPSKILS = 35.1
@@ -444,11 +415,6 @@ scene("game", () => {
 		VIDAS -= 1
 	})
 
-	maquina2.onCollide("inimigo", (inimigo) => {
-		destroy(inimigo)
-		VIDAS -= 1
-	})
-
 	player.onCollide("vida", (vida) => {
 		destroy(vida)
 		VIDAS += 1
@@ -458,27 +424,10 @@ scene("game", () => {
 		destroy(velocidade)
 		SPEED += 300;
 
-		const addIconeDeVelocidade = add([
-			rect(15, 15),
-			area(),
-			pos(1000, 54),
-			anchor("botleft"),
-			color(165, 19, 209),
-			body({ isStatic: true }),
-			z(100),
-			"iconeVelocidade",
-		])
-
 		function diminuirVelocidade(){
 			SPEED -= 300
 		}
-
-		function removeIconeDeVelocidade(){
-			destroy(iconeVelocidade)
-		}
-
 		setTimeout(diminuirVelocidade, 10000)
-		setTimeout(removeIconeDeVelocidade, 10000)
 
 	});
 
@@ -539,7 +488,9 @@ scene("game", () => {
 scene("lose", () => {
 	add([
 		//add um texto game over
-		text("Game Over"),
+		text("Game Over"), {
+			font: "fontegame"
+		},
 		//no centro da dela
 		pos(center()),
 		anchor("center"),
