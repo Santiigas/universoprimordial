@@ -1,6 +1,6 @@
 import kaboom from "kaboom"
 
-// 
+// npm run dev
 
 kaboom({
 	width: 1920,
@@ -345,7 +345,7 @@ scene("game", () => {
 	player.onCollide("inimigo", (inimigo) => {
 		destroy(inimigo)
 		PONTUACAO += PONTOS
-		if(PONTUACAO > 0 && PONTUACAO < 150){
+		if(PONTUACAO > 100 && PONTUACAO < 150){
 
 			PONTOS = 15
 			DROPSKILS = 55.1
@@ -397,8 +397,8 @@ scene("game", () => {
 			VELOCIDADE_SURGIMENTO_INIMIGO2_VALOR1 = 6.0
 			VELOCIDADE_SURGIMENTO_INIMIGO2_VALOR2= 7.0
 		
-			VELOCIDADE_INIMIGO1 = 180
-			VELOCIDADE_INIMIGO2 = 180
+			VELOCIDADE_INIMIGO1 = 200
+			VELOCIDADE_INIMIGO2 = 200
 		
 			VELOCIDADE_INIMIGO_DE_CIMA = 90
 		
