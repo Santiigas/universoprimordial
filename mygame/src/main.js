@@ -37,7 +37,6 @@ loadSprite("reator", "sprites/reator.png")
 loadFont("fontegame", "sprites/fonte.ttf")
 
 
-
 scene("game", () => {
 
 	//VARIAVEIS ESTATICAS
@@ -57,6 +56,14 @@ scene("game", () => {
 
 	let VELOCIDADE_INIMIGO1 = 100
 	let VELOCIDADE_INIMIGO2 = 100
+
+	let VELOCIDADE_INIMIGO_DE_CIMA = 50
+
+	let SURGIMENTO_INIMIGO1_VALOR1 = 40
+	let SURGIMENTO_INIMIGO1_VALOR2 = 30
+
+	let SURGIMENTO_INIMIGO2_VALOR1 = 35
+	let SURGIMENTO_INIMIGO2_VALOR2 = 45
 
 	setGravity(1600)
 
@@ -238,13 +245,22 @@ scene("game", () => {
 
 
 	// Maquina --------------------------------
-	const maquina = add([
+	const maquina1 = add([
 		sprite("reator"),
-		pos(910, height() - 98),
+		pos(1110, height() - 98),
 		area(),
 		body({ isStatic: true }),
 		z(100),
-		"camada3",
+		"maquina1",
+	])
+
+	const maquina2 = add([
+		sprite("reator"),
+		pos(750, height() - 98),
+		area(),
+		body({ isStatic: true }),
+		z(100),
+		"maquina2",
 	])
 
 	//Inimigos ---------------------------------------
@@ -287,20 +303,36 @@ scene("game", () => {
 	function inimigoAparece3() {
 		const inimigo3 = add([ 
 			sprite("inimigo"),
-			area(), 
-			pos(width() -1530, height() - 500),
+			area(),
+			pos(width() -801, height() - 1100),
 			anchor("botleft"),
-			move(RIGHT, VELOCIDADE_INIMIGO2),
-			body({ isStatic: false }),
+			move(DOWN, VELOCIDADE_INIMIGO_DE_CIMA),
 			z(100),
 			"inimigo",
 		]);
-			wait(rand(VELOCIDADE_SURGIMENTO_INIMIGO2_VALOR1, VELOCIDADE_SURGIMENTO_INIMIGO2_VALOR2), () => {
-			inimigoAparece2();
+			wait(rand(SURGIMENTO_INIMIGO1_VALOR1, SURGIMENTO_INIMIGO1_VALOR2), () => {
+			inimigoAparece3();
 		});
 	}
 
 	inimigoAparece3();
+
+	function inimigoAparece4() {
+		const inimigo3 = add([ 
+			sprite("inimigo"),
+			area(),
+			pos(width() -1162, height() - 1100),
+			anchor("botleft"),
+			move(DOWN, VELOCIDADE_INIMIGO_DE_CIMA),
+			z(100),
+			"inimigo",
+		]);
+			wait(rand(SURGIMENTO_INIMIGO2_VALOR1, SURGIMENTO_INIMIGO2_VALOR2), () => {
+			inimigoAparece4();
+		});
+	}
+
+	inimigoAparece4();
 
 	// SKILS ------------------------
 	function vidaAparece() {
@@ -383,7 +415,12 @@ scene("game", () => {
 		}
 	})
 
-	maquina.onCollide("inimigo", (inimigo) => {
+	maquina1.onCollide("inimigo", (inimigo) => {
+		destroy(inimigo)
+		VIDAS -= 1
+	})
+
+	maquina2.onCollide("inimigo", (inimigo) => {
 		destroy(inimigo)
 		VIDAS -= 1
 	})
@@ -421,7 +458,6 @@ scene("game", () => {
 
 	});
 
- 
 
 	//PONTACAO NA TELA
 	const textopontuacao = add([
