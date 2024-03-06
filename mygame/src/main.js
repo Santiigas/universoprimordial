@@ -73,7 +73,7 @@ scene("game", () => {
 
 	const player = add([
 		sprite("player"),
-		pos(912, 800),
+		pos(923, 800),
 		scale(2),
 		area(),
 		body(),
@@ -261,7 +261,7 @@ scene("game", () => {
 			anchor("botleft"),
 			move(LEFT, VELOCIDADE_INIMIGO1),
 			body({ isStatic: false }),
-			z(200),
+			z(50),
 			"inimigo",
 		]);
 			wait(rand(VELOCIDADE_SURGIMENTO_INIMIGO1_VALOR1, VELOCIDADE_SURGIMENTO_INIMIGO1_VALOR2), () => {
@@ -279,7 +279,7 @@ scene("game", () => {
 			anchor("botleft"),
 			move(RIGHT, VELOCIDADE_INIMIGO2),
 			body({ isStatic: false }),
-			z(200),
+			z(50),
 			"inimigo",
 		]);
 			wait(rand(VELOCIDADE_SURGIMENTO_INIMIGO2_VALOR1, VELOCIDADE_SURGIMENTO_INIMIGO2_VALOR2), () => {
@@ -305,25 +305,6 @@ scene("game", () => {
 	}
 
 	inimigoAparece3();
-
-	//Inimigos estaticos (mais nem tanto) ------------------
-
-	function inimigoFatal1() {
-		const inimigo_lento1 = add([ 
-			sprite("inimigo"),
-			area(),
-			pos(width() -1290, height() - 70),
-			body({ mass: 10 }),
-			anchor("botleft"),
-			move(RIGHT, 5),
-			z(0),
-			"inimigoFatal1",
-		]);
-	}
-
-	inimigoFatal1();
-
-
 
 	// SKILS ------------------------
 	function vidaAparece() {
@@ -368,7 +349,6 @@ scene("game", () => {
 		if(PONTUACAO > 100 && PONTUACAO < 150){
 
 			PONTOS = 15
-			DROPSKILS = 55.1
 		
 			VELOCIDADE_SURGIMENTO_INIMIGO1_VALOR1 = 6.0
 			VELOCIDADE_SURGIMENTO_INIMIGO1_VALOR2 = 10.0
@@ -389,7 +369,6 @@ scene("game", () => {
 		} else if (PONTUACAO > 150 && PONTUACAO < 400){
 
 			PONTOS = 20
-			DROPSKILS = 45.1
 		
 			VELOCIDADE_SURGIMENTO_INIMIGO1_VALOR1 = 5.0
 			VELOCIDADE_SURGIMENTO_INIMIGO1_VALOR2 = 8.0
@@ -410,7 +389,6 @@ scene("game", () => {
 		} else if (PONTUACAO > 400 && PONTUACAO < 1000){
 
 			PONTOS = 25
-			DROPSKILS = 35.1
 		
 			VELOCIDADE_SURGIMENTO_INIMIGO1_VALOR1 = 5.0
 			VELOCIDADE_SURGIMENTO_INIMIGO1_VALOR2 = 8.0
