@@ -119,3 +119,27 @@ scene("lose", () => {
 
 go("game")
 
+
+scene("lose", (score) => {
+
+	add([ 
+		sprite("bean"),
+		pos(width() / 2, height() / 2 - 108),
+		scale(3),
+		anchor("center"),
+	])
+
+	// display score
+	add([
+		text(score),
+		pos(width() / 2, height() / 2 + 108),
+		scale(3),
+		anchor("center"),
+	])
+
+	// go back to game with space is pressed
+	onKeyPress("space", () => go("start"))
+	onClick(() => go("start"))
+
+})
+
