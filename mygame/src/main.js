@@ -33,7 +33,9 @@ loadSprite("vida", "sprites/vida.png")
 loadSprite("velocidade", "sprites/velocidade.png")
 loadSprite("inimigo", "sprites/inimigo.png")
 loadSprite("reator", "sprites/reator.png")
-
+loadSprite("telainicial", "sprites/telainicial.png")
+loadSprite("tutorialdojogo", "sprites/tutorial.png")
+loadSprite("fimdejogo", "fimdejogo.png")
 loadFont("fontegame", "sprites/fonte.ttf")
 
 
@@ -509,33 +511,55 @@ scene("game", () => {
 
 })
 
+//Tela final ---- GAME OVER ---- 
 scene("end", (PONTUACAO) => {
-
 	const fundo = add([
-		sprite("fundo"),
+		sprite("fimdejogo"),
 		pos(0, 0),
 		area(),
 		z(0),
 	])
 
-
-
 	add([
-		
-		//add um texto game over
-		text("Game Over"), {
+		text(PONTUACAO), {
 			font: "fontegame"
 		},
-		//no centro da dela
 		pos(center()),
 		anchor("center"),
 	])
 
 	onKeyPress("space", () => go("game"))
 	onClick(() => go("start"))
-
 })
 
-go("game")
+//Tela tutorial --- SEGUNDA TELLA ---
+scene("tutorial", () => {
+	const fundo = add([
+		sprite("tutorialdojogo"),
+		pos(0, 0),
+		area(),
+		z(0),
+	])
+
+	onKeyPress("space", () => go("game"))
+	onClick(() => go("start"))
+})
+
+
+//Tela inicial ---- PRIMEIRA TELA---- 
+scene("telainicial", () => {
+	add([
+		sprite("telainicial"),
+		pos(0, 0),
+		area(),
+		z(0),
+	])
+
+	onKeyPress("start", () => go("tutorial"))
+	onClick(() => go("start"))
+})
+
+
+go("telainicial")
 
 
