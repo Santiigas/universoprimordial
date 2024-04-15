@@ -35,7 +35,7 @@ loadSprite("inimigo", "sprites/inimigo.png")
 loadSprite("reator", "sprites/reator.png")
 loadSprite("telainicial", "sprites/telainicial.png")
 loadSprite("tutorialdojogo", "sprites/tutorial.png")
-loadSprite("fimdejogo", "fimdejogo.png")
+loadSprite("fimdejogo", "sprites/fimdejogo.png")
 loadFont("fontegame", "sprites/fonte.ttf")
 
 
@@ -524,7 +524,15 @@ scene("end", (PONTUACAO) => {
 		text(PONTUACAO), {
 			font: "fontegame"
 		},
-		pos(center()),
+		pos(960,330),
+		anchor("center"),
+	])
+
+	add([
+		text("Pontuação:"), {
+			font: "fontegame"
+		},
+		pos(960,280),
 		anchor("center"),
 	])
 
@@ -555,8 +563,9 @@ scene("telainicial", () => {
 		z(0),
 	])
 
-	onKeyPress("start", () => go("tutorial"))
-	onClick(() => go("start"))
+	// onKeyPress("start", () => go("tutorial"))
+	// onClick(() => go("start"))
+	onKeyPress(() => go("tutorial"))
 })
 
 
