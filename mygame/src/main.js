@@ -37,6 +37,8 @@ loadSprite("telainicial", "sprites/telainicial.png")
 loadSprite("tutorialdojogo", "sprites/tutorial.png")
 loadSprite("fimdejogo", "sprites/fimdejogo.png")
 loadFont("fontegame", "sprites/fonte.ttf")
+loadSound("musica1", "sound/myuniverse.mp3")
+loadSound("musica2", "sound/coldplay1.mp3")
 
 
 scene("game", () => {
@@ -570,5 +572,4 @@ scene("telainicial", () => {
 
 
 go("telainicial")
-
 
