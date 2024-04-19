@@ -51,7 +51,7 @@ scene("game", () => {
 	const JUMP_FORCE = 640
 
 	//VARIAVEIS QUE MUDAM
-	let PONTOS = 10   
+	let PONTOS = 15   
 	let DROPSKILS = 75.1
 	let DROPVIGOR = 30
 
@@ -369,7 +369,7 @@ scene("game", () => {
 	player.onCollide("inimigo", (inimigo) => {
 		destroy(inimigo)
 		PONTUACAO += PONTOS
-		SPEED -= 15
+		SPEED -= 10
 		if(PONTUACAO > 100 && PONTUACAO < 150){
 
 			PONTOS = 15
@@ -413,7 +413,7 @@ scene("game", () => {
 		} else if (PONTUACAO > 400 && PONTUACAO < 1000){
 
 			PONTOS = 25
-			//SPEED = 450
+			DROPVIGOR = 25
 		
 			VELOCIDADE_SURGIMENTO_INIMIGO1_VALOR1 = 4.0
 			VELOCIDADE_SURGIMENTO_INIMIGO1_VALOR2 = 6.0
@@ -432,9 +432,9 @@ scene("game", () => {
 			SURGIMENTO_INIMIGO2_VALOR1 = 20
 			SURGIMENTO_INIMIGO2_VALOR2 = 40
 
-		} else if (PONTUACAO > 100){
+		} else if (PONTUACAO > 1000){
 			PONTOS = 35
-			//SPEED = 500
+			DROPVIGOR = 20
 		
 			VELOCIDADE_SURGIMENTO_INIMIGO1_VALOR1 = 3.0
 			VELOCIDADE_SURGIMENTO_INIMIGO1_VALOR2 = 4.0
@@ -537,6 +537,15 @@ scene("game", () => {
 	])	
 
 	//VELOCIDADE
+	const textovigor = add([
+		text("Velocidade:"), {
+			font: "fontegame"
+		},
+		color(76, 23, 6),
+		pos(30,70),
+		z(100)
+	])
+
 
 	const ui3 = add([
 		fixed(),
@@ -547,7 +556,7 @@ scene("game", () => {
 		text("3"), {
 			font: "fontegame"
 		},
-		pos(1760,100),
+		pos(260,70),
 		color(76, 23, 6),
 		z(100),
 		{ update() { this.text = SPEED } },
