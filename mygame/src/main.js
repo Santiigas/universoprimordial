@@ -40,10 +40,13 @@ loadSprite("fimdejogo", "sprites/fimdejogo.png")
 loadFont("fontegame", "sprites/fonte.ttf")
 loadSound("musica1", "sound/myuniverse.mp3")
 loadSound("musica2", "sound/coldplay1.mp3")
+loadSound("efeito1", "sound/efeito1.mp3")
+loadSound("efeito2", "sound/efeito2.mp3")
 
 
 scene("game", () => {
-
+	play("musica1")
+	volume(0.5)
 	//VARIAVEIS ESTATICAS
 	let SPEED = 400
 	let PONTUACAO = 0
@@ -370,6 +373,7 @@ scene("game", () => {
 		destroy(inimigo)
 		PONTUACAO += PONTOS
 		SPEED -= 10
+		play("efeito1")
 		if(PONTUACAO > 100 && PONTUACAO < 150){
 
 			PONTOS = 15
@@ -457,6 +461,7 @@ scene("game", () => {
 
 	maquina1.onCollide("inimigo", (inimigo) => {
 		destroy(inimigo)
+		play("efeito2")
 		VIDAS -= 1
 		if (VIDAS === 0){
 			go("end", PONTUACAO)		
@@ -466,22 +471,13 @@ scene("game", () => {
 	player.onCollide("vida", (vida) => {
 		destroy(vida)
 		VIDAS += 1
+		play("efeito1")
 	})
-
-	player.onCollide("velocidade", (velocidade) => {
-		destroy(velocidade)
-		SPEED += 300;
-
-		function diminuirVelocidade(){
-			SPEED -= 300
-		}
-		setTimeout(diminuirVelocidade, 10000)
-
-	});
 
 	player.onCollide("vigor", (vigor) => {
 		destroy(vigor)
 		SPEED = 400
+		play("efeito1")
 	})
 
 
