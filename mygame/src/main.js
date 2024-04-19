@@ -33,6 +33,7 @@ loadSprite("vida", "sprites/vida.png")
 loadSprite("velocidade", "sprites/velocidade.png")
 loadSprite("inimigo", "sprites/inimigo.png")
 loadSprite("reator", "sprites/reator.png")
+loadSprite("vigor", "sprites/vigor.png")
 loadSprite("telainicial", "sprites/telainicial.png")
 loadSprite("tutorialdojogo", "sprites/tutorial.png")
 loadSprite("fimdejogo", "sprites/fimdejogo.png")
@@ -52,6 +53,7 @@ scene("game", () => {
 	//VARIAVEIS QUE MUDAM
 	let PONTOS = 10   
 	let DROPSKILS = 75.1
+	let DROPVIGOR = 30
 
 	let VELOCIDADE_SURGIMENTO_INIMIGO1_VALOR1 = 6.5
 	let VELOCIDADE_SURGIMENTO_INIMIGO1_VALOR2 = 10.5
@@ -328,28 +330,46 @@ scene("game", () => {
 
 	vidaAparece();
 
-	function velocidadeAparece() {
-		const velocidade = add([ 
-			sprite("velocidade"),
+	// function velocidadeAparece() {
+	// 	const velocidade = add([ 
+	// 		sprite("velocidade"),
+	// 		area(),
+	// 		pos(width() - 1720, height() - 290),
+	// 		anchor("botleft"),
+	// 		body({ isStatic: false }),
+	// 		z(100),
+	// 		"velocidade",
+	// 	]);
+	// 		wait(DROPSKILS, () => {
+	// 		velocidadeAparece();
+	// 	});
+	// }
+
+	// velocidadeAparece();
+
+	function vigorAparece() {
+		const vigor = add([ 
+			sprite("vigor"),
 			area(),
 			pos(width() - 1720, height() - 290),
 			anchor("botleft"),
 			body({ isStatic: false }),
 			z(100),
-			"velocidade",
+			"vigor",
 		]);
-			wait(DROPSKILS, () => {
-			velocidadeAparece();
-		});
+			wait(DROPVIGOR, () => {
+			vigorAparece();
+		}); 
 	}
 
-	velocidadeAparece();
+	vigorAparece();
 	
 
 	//COLISOES e DIFICULDADE
 	player.onCollide("inimigo", (inimigo) => {
 		destroy(inimigo)
 		PONTUACAO += PONTOS
+		SPEED -= 15
 		if(PONTUACAO > 100 && PONTUACAO < 150){
 
 			PONTOS = 15
@@ -393,7 +413,7 @@ scene("game", () => {
 		} else if (PONTUACAO > 400 && PONTUACAO < 1000){
 
 			PONTOS = 25
-			SPEED = 450
+			//SPEED = 450
 		
 			VELOCIDADE_SURGIMENTO_INIMIGO1_VALOR1 = 4.0
 			VELOCIDADE_SURGIMENTO_INIMIGO1_VALOR2 = 6.0
@@ -414,7 +434,7 @@ scene("game", () => {
 
 		} else if (PONTUACAO > 100){
 			PONTOS = 35
-			SPEED = 500
+			//SPEED = 500
 		
 			VELOCIDADE_SURGIMENTO_INIMIGO1_VALOR1 = 3.0
 			VELOCIDADE_SURGIMENTO_INIMIGO1_VALOR2 = 4.0
@@ -458,6 +478,11 @@ scene("game", () => {
 		setTimeout(diminuirVelocidade, 10000)
 
 	});
+
+	player.onCollide("vigor", (vigor) => {
+		destroy(vigor)
+		SPEED = 400
+	})
 
 
 	//PONTACAO NA TELA
@@ -511,6 +536,22 @@ scene("game", () => {
 		{ update() { this.text = VIDAS } },
 	])	
 
+	//VELOCIDADE
+
+	const ui3 = add([
+		fixed(),
+		z(100),
+	])
+
+	ui3.add([
+		text("3"), {
+			font: "fontegame"
+		},
+		pos(1760,100),
+		color(76, 23, 6),
+		z(100),
+		{ update() { this.text = SPEED } },
+	])	
 })
 
 //Tela final ---- GAME OVER ---- 
