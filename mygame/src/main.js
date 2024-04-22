@@ -38,22 +38,18 @@ loadSprite("telainicial", "sprites/telainicial.png")
 loadSprite("tutorialdojogo", "sprites/tutorial.png")
 loadSprite("fimdejogo", "sprites/fimdejogo.png")
 loadFont("fontegame", "sprites/fonte.ttf")
-loadSound("musica1", "sound/myuniverse.mp3")
-loadSound("musica2", "sound/coldplay1.mp3")
+loadSound("musica1", "sound/musica1.mp3")
 loadSound("efeito1", "sound/efeito1.mp3")
 loadSound("efeito2", "sound/efeito2.mp3")
 
 
 scene("game", () => {
-	play("musica1")
-	volume(0.5)
-	//VARIAVEIS ESTATICAS
+
 	let SPEED = 400
 	let PONTUACAO = 0
 	let VIDAS = 3
 	const JUMP_FORCE = 640
 
-	//VARIAVEIS QUE MUDAM
 	let PONTOS = 15   
 	let DROPSKILS = 75.1
 	let DROPVIGOR = 30
@@ -91,7 +87,6 @@ scene("game", () => {
 
 	player.play("parado")
 
-	// Switch to "idle" or "run" animation when player hits ground
 	player.onGround(() => {
 	if (!isKeyDown("left") && !isKeyDown("right")) {
 		player.play("parado")
@@ -115,7 +110,6 @@ scene("game", () => {
 	onKeyDown("left", () => {
 		player.move(-SPEED, 0)
 		player.flipX = true
-		// .play() will reset to the first frame of the anim, so we want to make sure it only runs when the current animation is not "run"
 		if (player.isGrounded() && player.curAnim() !== "correndo") {
 			player.play("correndo")
 		}
@@ -131,7 +125,6 @@ scene("game", () => {
 
 	;["left", "right"].forEach((key) => {
 		onKeyRelease(key, () => {
-		// Only reset to "idle" if player is not holding any of these keys
 			if (player.isGrounded() && !isKeyDown("left") && !isKeyDown("right")) {
 				player.play("parado")
 			}
@@ -211,8 +204,6 @@ scene("game", () => {
 		"camada3",
 	])
 
-	// Nuvens --------------------------------
-
 	function nuvenAparece() {
 		const nuven1 = add([ 
 			sprite("nuven1"),
@@ -249,8 +240,6 @@ scene("game", () => {
 
 	nuvenAparece2();
 
-
-	// Maquina --------------------------------
 	const maquina1 = add([
 		sprite("reator"),
 		pos(920, height() - 98),
@@ -259,8 +248,6 @@ scene("game", () => {
 		z(100),
 		"maquina1",
 	])
-
-	//Inimigos que se dinamicos  ------------------
 
 	function inimigoAparece() {
 		const inimigo = add([ 
@@ -315,7 +302,6 @@ scene("game", () => {
 
 	inimigoAparece3();
 
-	// SKILS ------------------------
 	function vidaAparece() {
 		const vida = add([ 
 			sprite("vida"),
@@ -332,23 +318,6 @@ scene("game", () => {
 	}
 
 	vidaAparece();
-
-	// function velocidadeAparece() {
-	// 	const velocidade = add([ 
-	// 		sprite("velocidade"),
-	// 		area(),
-	// 		pos(width() - 1720, height() - 290),
-	// 		anchor("botleft"),
-	// 		body({ isStatic: false }),
-	// 		z(100),
-	// 		"velocidade",
-	// 	]);
-	// 		wait(DROPSKILS, () => {
-	// 		velocidadeAparece();
-	// 	});
-	// }
-
-	// velocidadeAparece();
 
 	function vigorAparece() {
 		const vigor = add([ 
@@ -367,13 +336,16 @@ scene("game", () => {
 
 	vigorAparece();
 	
-
 	//COLISOES e DIFICULDADE
 	player.onCollide("inimigo", (inimigo) => {
 		destroy(inimigo)
 		PONTUACAO += PONTOS
 		SPEED -= 10
-		play("efeito1")
+
+		const music = play("efeito1", {
+			volume: 0.2,
+		})
+
 		if(PONTUACAO > 100 && PONTUACAO < 150){
 
 			PONTOS = 15
@@ -461,8 +433,12 @@ scene("game", () => {
 
 	maquina1.onCollide("inimigo", (inimigo) => {
 		destroy(inimigo)
-		play("efeito2")
 		VIDAS -= 1
+
+		const music = play("efeito2", {
+			volume: 0.2,
+		})
+
 		if (VIDAS === 0){
 			go("end", PONTUACAO)		
 		}
@@ -471,15 +447,21 @@ scene("game", () => {
 	player.onCollide("vida", (vida) => {
 		destroy(vida)
 		VIDAS += 1
-		play("efeito1")
+
+		const music = play("efeito1", {
+			volume: 0.2,
+		})
+
 	})
 
 	player.onCollide("vigor", (vigor) => {
 		destroy(vigor)
 		SPEED = 400
-		play("efeito1")
-	})
 
+		const music = play("efeito1", {
+			volume: 0.2,
+		})
+	})
 
 	//PONTACAO NA TELA
 	const textopontuacao = add([
@@ -506,8 +488,6 @@ scene("game", () => {
 		{ update() { this.text = PONTUACAO } },
 	])
 
-
-	//VIDAS
 	const textovidas = add([
 		text("Vidas:"), {
 			font: "fontegame"
@@ -532,7 +512,6 @@ scene("game", () => {
 		{ update() { this.text = VIDAS } },
 	])	
 
-	//VELOCIDADE
 	const textovigor = add([
 		text("Velocidade:"), {
 			font: "fontegame"
@@ -541,7 +520,6 @@ scene("game", () => {
 		pos(30,70),
 		z(100)
 	])
-
 
 	const ui3 = add([
 		fixed(),
@@ -559,8 +537,8 @@ scene("game", () => {
 	])	
 })
 
-//Tela final ---- GAME OVER ---- 
 scene("end", (PONTUACAO) => {
+
 	const fundo = add([
 		sprite("fimdejogo"),
 		pos(0, 0),
@@ -588,7 +566,6 @@ scene("end", (PONTUACAO) => {
 	onClick(() => go("start"))
 })
 
-//Tela tutorial --- SEGUNDA TELLA ---
 scene("tutorial", () => {
 	const fundo = add([
 		sprite("tutorialdojogo"),
@@ -601,9 +578,12 @@ scene("tutorial", () => {
 	onClick(() => go("start"))
 })
 
-
-//Tela inicial ---- PRIMEIRA TELA---- 
 scene("telainicial", () => {
+
+	const music = play("musica1", {
+		volume: 0.2,
+	})
+
 	add([
 		sprite("telainicial"),
 		pos(0, 0),
@@ -611,8 +591,6 @@ scene("telainicial", () => {
 		z(0),
 	])
 
-	// onKeyPress("start", () => go("tutorial"))
-	// onClick(() => go("start"))
 	onKeyPress(() => go("tutorial"))
 })
 
