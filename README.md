@@ -7,6 +7,7 @@
 - Após baixar e abrir o arquivo, clique com o botão direito sobre a pasta "mygame" e selecione a opção "Abrir no terminal integrado".
 - No terminal, execute o comando `npm run dev`.
 - Copie o último link fornecido, que corresponde à opção "Local", e cole-o na barra de endereço do seu navegador para abrir o jogo.
+- Depois de jogar, acesse esse formulário: [Universo Primordial](https://forms.gle/f1VXB2GJS748Qz25A)
 
 ## Sobre o jogo
 Universo Primordial é um protótipo de jogo desenvolvido em JavaScript, que será posteriormente elaborado na plataforma Unity. Utilizando a biblioteca Kaboom.js, foi possível implementar toda a mecânica do jogo, desde a criação de partes dos cenários até a movimentação, interação e comportamento do jogador principal e dos inimigos.
