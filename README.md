@@ -3,10 +3,12 @@
 ### Para jogar
 
 - Clone o repositório para o seu computador.
-- Certifique-se de ter o Node.js instalado na sua máquina.
-- Após baixar e abrir o arquivo, clique com o botão direito sobre a pasta "mygame" e selecione a opção "Abrir no terminal integrado".
+- Certifique-se de ter o "Node.js", "npm" e suas dependências instalados na sua máquina.
+- Faça a instalacão da biblioteca Kaboom.js, utilizando o comando `npm install kaboom`.
+- No repositório clonado, clique com o botão direito sobre a pasta "mygame" e selecione a opção "Abrir no terminal integrado".
 - No terminal, execute o comando `npm run dev`.
 - Copie o último link fornecido, que corresponde à opção "Local", e cole-o na barra de endereço do seu navegador para abrir o jogo.
+- Aproveite :D
 - Depois de jogar, acesse esse formulário: [Universo Primordial](https://forms.gle/f1VXB2GJS748Qz25A)
 
 ## Sobre o jogo
