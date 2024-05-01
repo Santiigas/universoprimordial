@@ -597,3 +597,5 @@ scene("telainicial", () => {
 
 go("telainicial")
 
+
+
